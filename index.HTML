@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Томирис - Қыз Ұзату</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark-red: #8b0000;
+            --text-color: #333;
+            --bg-light: #fffdf9;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Орнамент сверху и снизу */
+        .ornament {
+            width: 150px;
+            margin: 20px auto;
+            opacity: 0.7;
+        }
+
+        section {
+            padding: 40px 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--gold);
+            margin: 10px 0;
+        }
+
+        .event-title {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .invitation-text {
+            line-height: 1.8;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .details-box {
+            border: 1px solid var(--gold);
+            padding: 30px 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .date {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--text-color);
+            display: block;
+        }
+
+        .month {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 1.2rem;
+        }
+
+        .time {
+            font-size: 2rem;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .address {
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        /* Таймер */
+        #timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .timer-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timer-val {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark-red);
+        }
+
+        .timer-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        /* Форма RSVP */
+        .rsvp-form {
+            background-color: #f9f4eb;
+            padding: 30px 20px;
+            border-radius: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid var(--gold);
+            background: transparent;
+            border-radius: 25px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .radio-group {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .radio-option {
+            margin-bottom: 10px;
+            display: block;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #a68545;
+        }
+
+        .hosts {
+            margin-top: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+
+        .footer-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            margin: 40px 0;
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <img src="tttt.jpg" alt="Дильназ Қыз Ұзату" style="width:100%; max-width:500px; height: auto; border-radius: 10px; margin: 20px auto; display: block;">
+        <h1>Томирис</h1>
+        <div class="event-title">Қыз Ұзату</div>
+        
+        <p class="invitation-text">
+            Құрметті ағайын-туыс, бауырлар, құда-жекжат, нағашы-жиен, бөлелер, дос-жарандар, әріптестер мен көршілер! 
+            <br><br>
+            Сіздерді аяулы қызымыз <b>Томиристың</b> ұзату тойына арналған ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!
+        </p>
+    </section>
+
+    <div style="display: flex; justify-content: center; padding: 20px;">
+    <div style="
+        border: 1px solid #c5a059; 
+        padding: 40px 20px; 
+        max-width: 400px; 
+        width: 100%; 
+        text-align: center;
+        background-color: #fffdf9;">
+        
+        <div style="letter-spacing: 5px; text-transform: uppercase; font-size: 1.2rem; color: #333;">Тамыз</div>
+        <div style="font-size: 4rem; font-weight: bold; margin: 10px 0;">09</div>
+        <div style="font-size: 2rem; margin-bottom: 25px;">13:00</div>
+        
+        <div style="font-weight: bold; line-height: 1.5; font-size: 0.9rem; text-transform: uppercase;">
+            Мекен - жайымыз:<br>
+            Қарағанды қаласы,<br>
+            Гапеева көшесі 37/2,<br>
+            "Garden Hall" мейрамханасы
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <a href="https://2gis.kz/karaganda/search/Гапеева%2037%2F2" target="_blank" style="color: #c5a059; text-decoration: none; font-size: 0.8rem; border-bottom: 1px solid #c5a059;">Открыть в 2GIS</a>
+        </div>
+    </div>
+</div>
+        
+        <div class="address">
+            Мекен - жайымыз:<br>
+            ҚАРАҒАНДЫ ҚАЛАСЫ,<br>
+            ГАПЕЕВА КӨШЕСІ 37/2,<br>
+            "GARDEN HALL" МЕЙРАМХАНАСЫ
+        </div>
+        
+        <div style="margin-top: 15px;">
+            <a href="https://2gis.kz/karaganda/search/Гапеева%2037%2F2" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 0.8rem;">Открыть в 2GIS</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="event-title" style="font-size: 0.9rem;">Той салтанатына дейін:</div>
+        <div id="timer">
+            <div class="timer-item"><span id="days" class="timer-val">00</span><span class="timer-label">күн</span></div>
+            <div class="timer-item"><span id="hours" class="timer-val">00</span><span class="timer-label">сағат</span></div>
+            <div class="timer-item"><span id="minutes" class="timer-val">00</span><span class="timer-label">минут</span></div>
+            <div class="timer-item"><span id="seconds" class="timer-val">00</span><span class="timer-label">секунд</span></div>
+        </div>
+    </section>
+
+    <section class="rsvp-form">
+        <div class="event-title" style="font-size: 0.8rem;">Тойға келетініңізді растауыңызды сұраймыз</div>
+        <form id="inviteForm">
+            <input type="text" placeholder="Аты-жөніңіз" required>
+            <p style="font-size: 0.7rem; color: #777;">Жұбайыңызбен келетін болсаңыз, екі есімді де көрсетіңіз</p>
+            
+            <div class="radio-group">
+                <label class="radio-option"><input type="radio" name="status" value="yes"> Әрине, келемін</label>
+                <label class="radio-option"><input type="radio" name="status" value="with_spouse"> Жұбайыммен келемін</label>
+                <label class="radio-option"><input type="radio" name="status" value="no"> Өкінішке орай, келе алмаймын</label>
+            </div>
+            
+            <button type="submit">Жіберу</button>
+        </form>
+    </section>
+
+    <section>
+        <div class="hosts">
+            Той иелері:<br>
+            <strong>ДӘУРЕН - АЙГҮЛ</strong>
+        </div>
+        <div class="footer-text">Қуанышымызға ортақ болыңыздар!</div>
+    </section>
+
+    <script>
+        // Установка даты (9 тамыз 2026 13:00)
+        const countDownDate = new Date("Aug 9, 2026 14:00:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timer").innerHTML = "ТОЙ БАСТАЛДЫ!";
+            }
+        }, 1000);
+
+        // Обработка формы
+        document.getElementById('inviteForm').onsubmit = function(e) {
+            e.preventDefault();
+            alert('Рахмет! Жауабыңыз қабылданды.');
+        };
+    </script>
+</body>
+</html>
