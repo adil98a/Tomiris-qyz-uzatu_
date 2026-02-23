@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomiris — Қыз Ұзату</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Montserrat:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold-grad: linear-gradient(135deg, #c5a059 0%, #f1e4af 50%, #a68549 100%);
+            --text-dark: #2c2c2c;
+            --bg-soft: #fdfaf6;
+            --accent: #c5a059;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #ece9e6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Кіру экраны */
+        #openScreen {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .open-content { text-align: center; color: #fff; }
+        .open-content h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            background: var(--gold-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.2)); }
+            to { filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.6)); }
+        }
+
+        .open-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 15px 45px;
+            letter-spacing: 5px;
+            cursor: pointer;
+            transition: 0.5s;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .open-btn:hover { background: var(--accent); color: white; }
+
+        .wrapper {
+            max-width: 450px;
+            margin: 0 auto;
+            background: var(--bg-soft);
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 80px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+        }
+
+        .hero-box {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            transform: scale(1.1);
+            animation: zoomOut 10s forwards;
+        }
+
+        @keyframes zoomOut { to { transform: scale(1); } }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-invite {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            margin: 10px 0;
+            color: #2c2c2c;
+        }
+
+        .event-type {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 10px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        /* Бір суретті блок */
+        .img-break {
+            padding: 0 20px;
+            margin: 30px 0;
+        }
+        .img-break img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 100px 0 100px 0;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .glass-card {
+            margin: 20px;
+            padding: 40px 20px;
+            background: #fff;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            text-align: center;
+            border-radius: 50px 0 50px 0;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.02);
+        }
+
+        .date-big {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: #222;
+            line-height: 1;
+        }
+
+        .timer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .t-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent); font-weight: bold; }
+        .t-lab { font-size: 0.6rem; text-transform: uppercase; color: #888; }
+
+        .btn-gold {
+            background: var(--gold-grad);
+            color: #fff;
+            border: none;
+            padding: 20px;
+            width: 100%;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 3px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-gold:active { transform: scale(0.98); }
+
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            border: 1px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .wave { width: 3px; height: 15px; background: var(--accent); margin: 2px; animation: quiet 1.2s infinite alternate; }
+        .wave.play { animation: loud 1.2s infinite alternate; }
+        @keyframes loud { 0% { height: 5px; } 100% { height: 25px; } }
+
+        /* Animation class */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1); 
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        input, select {
+            width: 100%;
+            padding: 18px;
+            border: 1px solid #eee;
+            background: #f9f9f9;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 10px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus { border-color: var(--accent); background: #fff; }
+
+        .map-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-top: 15px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid;
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+        .map-link:hover { letter-spacing: 4px; }
+
+    </style>
+</head>
+<body>
+
+<div id="openScreen">
+    <div class="open-content">
+        <p style="letter-spacing: 5px; font-size: 0.7rem;">ШАҚЫРУ / INVITATION</p>
+        <h2>Tomiris</h2>
+        <button class="open-btn" onclick="start()">Ашу / Open</button>
+    </div>
+</div>
+
+<audio id="track" loop>
+    <source src="mus.mp3" type="audio/mpeg">
+</audio>
+
+<div class="wrapper" id="content">
+    <div class="hero-box">
+        <img src="tttt.jpg" class="hero-img" alt="Tomiris">
+    </div>
+
+    <header class="reveal">
+        <div class="event-type">Қыз Ұзату</div>
+        <h1>Tomiris</h1>
+        <div class="main-invite">
+            Құрметті ағайын-туыс, бауырлар, құда-жекжат, нағашы-жиендер және дос-жарандар!
+        </div>
+        <p style="font-style: italic; color: #888; font-size: 0.9rem;">
+            Сіздерді аяулы қызымыздың ұзату тойына арналған салтанатты дастарханымыздың қадірлі қонағы болуға шақырамыз!
+        </p>
+    </header>
+
+    <div class="img-break reveal">
+        <img src="img1.jpeg" alt="Tomiris Portrait">
+    </div>
+
+    <div class="glass-card reveal">
+        <div style="text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; color: var(--accent);">Тамыз / 2026</div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin: 20px 0;">
+            <div style="font-size: 0.8rem; text-align: right; line-height: 1.5;">ЖЕКСЕНБІ<br>САҒАТ 13:00</div>
+            <div class="date-big">09</div>
+            <div style="font-size: 0.8rem; text-align: left;">КҮНІ</div>
+        </div>
+        <div style="height: 1px; background: linear-gradient(to right, transparent, #c5a059, transparent); margin: 20px 0;"></div>
+        <div class="timer-container">
+            <div><span id="d" class="t-num">00</span><br><span class="t-lab">күн</span></div>
+            <div><span id="h" class="t-num">00</span><br><span class="t-lab">сағат</span></div>
+            <div><span id="m" class="t-num">00</span><br><span class="t-lab">мин</span></div>
+            <div><span id="s" class="t-num">00</span><br><span class="t-lab">сек</span></div>
+        </div>
+    </div>
+
+    <div class="reveal" style="text-align: center; padding: 40px 20px;">
+        <div class="event-type" style="font-size: 0.7rem;">Мекен-жайымыз:</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 2.5rem; font-style: italic; color: var(--accent); margin: 10px 0;">Garden Hall</div>
+        <p style="font-size: 1rem; line-height: 1.6; color: #555;">Қарағанды қаласы,<br>Гапеева 37/2</p>
+        <a href="https://2gis.kz/karaganda/search/%D0%93%D0%B0%D0%BF%D0%B5%D0%B5%D0%B2%D0%B0%2037%2F2" class="map-link">КАРТАДАН КӨРУ</a>
+    </div>
+
+    <div class="img-break reveal">
+        <img src="img2.jpeg" alt="Tomiris Moment">
+    </div>
+
+    <div class="glass-card reveal">
+        <div class="event-type" style="font-size: 0.7rem; margin-bottom: 25px;">RSVP — Жауап беру</div>
+        <form id="rsvp">
+            <input type="text" id="name" placeholder="Аты-жөніңіз" required>
+            <select id="status" onchange="toggleCount()">
+                <option value="Келемін">Келемін</option>
+                <option value="Жұбайымен / Отбасымен">Жұбайымен / Отбасымен</option>
+                <option value="Өкінішке орай, келе алмаймын">Келе алмаймын</option>
+            </select>
+            <div id="guestCountDiv">
+                <select id="count">
+                    <option value="1 адам">1 адам</option>
+                    <option value="2 адам">2 адам</option>
+                    <option value="3+ адам">3+ адам</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-gold">РАСТАУ</button>
+        </form>
+    </div>
+    
+    <div class="reveal" style="text-align: center; padding: 40px 20px; background: #fff; margin-top: 20px;">
+        <div style="font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 4px; color: #888;">ТОЙ ИЕЛЕРІ:</div>
+        <div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent); margin-top: 10px;">Дәурен — Айгүл</div>
+        <p style="font-size: 0.7rem; color: #aaa; margin-top: 30px; letter-spacing: 2px;">СІЗДЕРДІ АСЫҒА КҮТЕМІЗ!</p>
+    </div>
+</div>
+
+<div class="music-btn" onclick="toggleMusic()">
+    <div class="wave" id="w1"></div>
+    <div class="wave" id="w2"></div>
+    <div class="wave" id="w3"></div>
+</div>
+
+<script>
+    const track = document.getElementById('track');
+
+    function start() {
+        document.getElementById('openScreen').style.transform = 'translateY(-100%)';
+        track.play();
+        toggleWaves(true);
+        // Scroll-ды рұқсат ету
+        setTimeout(initReveal, 500);
+    }
+
+    function toggleMusic() {
+        if (track.paused) { track.play(); toggleWaves(true); } 
+        else { track.pause(); toggleWaves(false); }
+    }
+
+    function toggleWaves(play) {
+        document.querySelectorAll('.wave').forEach(w => play ? w.classList.add('play') : w.classList.remove('play'));
+    }
+
+    function toggleCount() {
+        const status = document.getElementById('status').value;
+        const countDiv = document.getElementById('guestCountDiv');
+        countDiv.style.display = (status === 'Өкінішке орай, келе алмаймын') ? 'none' : 'block';
+    }
+
+    // Scroll Animation Logic
+    function initReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    // Countdown
+    const countDate = new Date("August 9, 2026 13:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const gap = countDate - now;
+        
+        const d = Math.max(0, Math.floor(gap / (1000 * 60 * 60 * 24)));
+        const h = Math.max(0, Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        const m = Math.max(0, Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60)));
+        const s = Math.max(0, Math.floor((gap % (1000 * 60)) / 1000));
+
+        document.getElementById('d').innerText = d.toString().padStart(2, '0');
+        document.getElementById('h').innerText = h.toString().padStart(2, '0');
+        document.getElementById('m').innerText = m.toString().padStart(2, '0');
+        document.getElementById('s').innerText = s.toString().padStart(2, '0');
+    }, 1000);
+
+    document.getElementById('rsvp').onsubmit = (e) => {
+        e.preventDefault();
+        const n = document.getElementById('name').value;
+        const s = document.getElementById('status').value;
+        const c = (s === 'Өкінішке орай, келе алмаймын') ? "" : "\nҚонақ саны: " + document.getElementById('count').value;
+        
+        const message = `Сәлеметсіз бе! Томиристің ұзату тойына шақырту бойынша жауап:\n\nЕсімі: ${n}\nШешімі: ${s}${c}`;
+        const url = `https://wa.me/77009856091?text=${encodeURIComponent(message)}`;
+        window.open(url);
+    };
+</script>
+
+</body>
+</html>
